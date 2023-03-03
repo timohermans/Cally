@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:Cally.App.ViewModels"
+             x:Class="Cally.App.Views.HomeView"
+             Title="HomeView">
+
+    <ContentPage.BindingContext>
+        <viewmodels:MainPageViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <Style x:Key="SectionContainerStyle" TargetType="Grid">
+                <Setter Property="Margin" Value="12, 6" />
+            </Style>
+
+            <Style x:Key="HeaderStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="24" />
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <VerticalStackLayout>
+        <Grid ColumnDefinitions="*, *, *" Style="{StaticResource SectionContainerStyle}">
+            <Label 
+                Grid.Column="1"
+                Text="Calorietjes!"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center"
+                Style="{StaticResource HeaderStyle}"/>
+        </Grid>
+
+        <Grid Style="{StaticResource SectionContainerStyle}">
+            <CollectionView ItemsSource="{Binding Entries}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="3*, *, *, *, *">
+                            <Label Grid.Column="0" Text="{Binding Name}"/>
+                            <Label Grid.Column="1" Text="{Binding UnitAmount}"/>
+                            <Label Grid.Column="2" Text="{Binding UnitCalories}"/>
+                            <Label Grid.Column="3" Text="{Binding AmountOfUnits}"/>
+                            <Label Grid.Column="4" Text="{Binding Calories, StringFormat={}{0:F0}}"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>
