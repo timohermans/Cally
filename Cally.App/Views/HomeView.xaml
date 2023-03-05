@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:Cally.App.ViewModels"
+             xmlns:components="clr-namespace:Cally.App.Views.Components"
              x:Class="Cally.App.Views.HomeView"
              Title="HomeView">
 
@@ -24,33 +25,45 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <VerticalStackLayout>
-        <Grid ColumnDefinitions="*, *, *" Style="{StaticResource SectionContainerStyle}">
-            <Label 
+    <Grid>
+        <VerticalStackLayout>
+            <Grid ColumnDefinitions="*, *, *" Style="{StaticResource SectionContainerStyle}">
+                <Label 
                 Grid.Column="1"
                 Text="Calorietjes!"
                 VerticalOptions="Center" 
                 HorizontalOptions="Center"
                 Style="{StaticResource HeaderStyle}"/>
-        </Grid>
+            </Grid>
 
-        <Grid Style="{StaticResource SectionContainerStyle}">
-            <CollectionView ItemsSource="{Binding Entries}">
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid ColumnDefinitions="3*, *, *, *, *">
-                            <Label Grid.Column="0" Text="{Binding Name}"/>
-                            <Label Grid.Column="1" Text="{Binding UnitAmount}"/>
-                            <Label Grid.Column="2" Text="{Binding UnitCalories}"/>
-                            <Label Grid.Column="3" Text="{Binding AmountOfUnits}"/>
-                            <Label Grid.Column="4" Text="{Binding Calories, StringFormat={}{0:F0}}"/>
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </Grid>
-    </VerticalStackLayout>
+            <Grid Style="{StaticResource SectionContainerStyle}">
+                <CollectionView ItemsSource="{Binding Entries}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ColumnDefinitions="3*, *, *, *, *">
+                                <Label Grid.Column="0" Text="{Binding Name}"/>
+                                <Label Grid.Column="1" Text="{Binding UnitAmount}"/>
+                                <Label Grid.Column="2" Text="{Binding UnitCalories}"/>
+                                <Label Grid.Column="3" Text="{Binding AmountOfUnits}"/>
+                                <Label Grid.Column="4" Text="{Binding Calories,StringFormat='{}{0:F0}'}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+
+            <Button Text="Add Calories!" Clicked="Button_Clicked" />
+            <Button Text="Close" Clicked="Button_Clicked_1" />
+        </VerticalStackLayout>
+
+        <components:BottomSheet x:Name="Sheet" SheetHeight="300">
+            <components:BottomSheet.SheetContent>
+                    <Label Text="This is the first step!" />
+            </components:BottomSheet.SheetContent>
+        </components:BottomSheet>
+    </Grid>
+
 </ContentPage>
