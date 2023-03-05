@@ -1,5 +1,8 @@
 namespace Cally.App.Views.Components;
 
+/// <summary>
+/// Based on https://xamarinhowto.com/xamarin-forms-lightweight-bottom-sheet-modal/
+/// </summary>
 public partial class BottomSheet : ContentView
 {
     public double SheetHeight
